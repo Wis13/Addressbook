@@ -1,11 +1,13 @@
 package com.vadym.test.test;
 
 import com.vadym.test.model.GroupData;
+import com.vadym.test.model.Groups;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupModificationTest extends TestBase {
     @BeforeMethod
@@ -19,18 +21,16 @@ public class GroupModificationTest extends TestBase {
     @Test
     public void testGroupModification() {
 
-        Set<GroupData> before = app.group().all();
+        Groups before = app.group().all();
         GroupData modifiedGroup = before.iterator().next();
         GroupData group = new GroupData().withId(modifiedGroup.getId())
                 .withName("test1").withHeader("test2").withFooter("test3");
         app.group().modify(group);
-        Set<GroupData> after = app.group().all();
+        Groups after = app.group().all();
         Assert.assertEquals(after.size(), before.size());
 
-        before.remove(modifiedGroup);
-        before.add(group);
+        assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
 
-        Assert.assertEquals(before,after);
     }
 
 

@@ -2,19 +2,19 @@ package com.vadym.test.test;
 
 import com.vadym.test.appmanager.ApplicationManager;
 import org.openqa.selenium.remote.BrowserType;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 public class TestBase {
 
-    protected final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
+    protected static final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
 
-    @BeforeTest
+    @BeforeSuite
     public void setUp() throws InterruptedException {
         app.init();
     }
 
-    @AfterTest
+    @AfterSuite
     public void tearDown() {
         app.stop();
     }

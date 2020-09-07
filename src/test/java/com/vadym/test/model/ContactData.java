@@ -1,21 +1,25 @@
 package com.vadym.test.model;
 
+import java.io.File;
+
 public class ContactData {
-    private final String firstname;
-    private final String lastname;
-    private final String group;
-    private boolean creation;
-
-    public ContactData(String firstname, String lastname, String group) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.group = group;
-
-    }
+    private int id;
+    private String firstname;
+    private String lastname;
+    private String group;
+    private String homePhone;
+    private String mobilePhone;
+    private String workPhone;
+    private String allPhones;
+    private File photo;
 
 
     public String getFirstname() {
         return firstname;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getLastname() {
@@ -26,5 +30,42 @@ public class ContactData {
         return group;
     }
 
+    public String getHomePhone() { return homePhone; }
 
+    public String getMobilePhone() { return mobilePhone; }
+
+    public String getWorkPhone() { return workPhone; }
+
+    public String getAllPhones() { return allPhones; }
+
+    public File getPhoto() { return photo; }
+
+    public ContactData withId(int id) { this.id = id; return this;}
+
+    public ContactData withFirstname(String firstname) { this.firstname = firstname; return this;  }
+
+    public ContactData withLastname(String lastname) { this.lastname = lastname; return this; }
+
+    public ContactData withHomePhone(String homePhone) { this.homePhone = homePhone; return this;  }
+
+    public ContactData withMobilePhone(String mobilePhone) { this.mobilePhone = mobilePhone; return this;  }
+
+    public ContactData withWorkPhone(String workPhone) { this.workPhone = workPhone; return this; }
+
+    public ContactData withAllPhones(String allPhones) { this.allPhones = allPhones; return this;  }
+
+    public ContactData withPhoto(File photo) { this.photo = photo; return this; }
+
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", group='" + group + '\'' +
+                ", homePhone='" + homePhone + '\'' +
+                ", mobilePhone='" + mobilePhone + '\'' +
+                ", workPhone='" + workPhone + '\'' +
+                '}';
+    }
 }

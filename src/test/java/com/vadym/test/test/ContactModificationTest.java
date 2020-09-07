@@ -1,18 +1,35 @@
 package com.vadym.test.test;
 
 import com.vadym.test.model.ContactData;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.util.Set;
+
 public class ContactModificationTest extends TestBase {
-    @Test(enabled = false)
+
+    @BeforeMethod
+    public void ensurePrecondishions() {
+        app.goTo().HomePage();
+        if (app.contact().all().size() == 0) {
+            File photo = new File("./mord.png");
+                  app.contact().create(new ContactData().withId(1).withFirstname("test13")
+                    .withLastname("rest13").withPhoto(photo), true);
+        }
+    }
+
+    @Test
     public void testGroupModification() {
 
-        app.goTo().goToHomePage();
-        app.getContactHelper().initContactModification();
-        app.getContactHelper().fillContactForm(new ContactData("test_name", "test_surname", null), false);
-        app.getContactHelper().submitContactModification();
-        app.getContactHelper().returnToHomePage();
+        Set<ContactData> before = app.contact().all();
+        ContactData modifiedContact = before.iterator().next();
+        File photo = new File("./mord.png");
 
+        app.contact().modify(new ContactData().withId(modifiedContact.getId()).withFirstname("test222")
+                .withLastname("rest222").withPhoto(photo), true);
 
     }
+
+
 }

@@ -1,14 +1,17 @@
 package com.vadym.test.model;
 
-import java.util.Objects;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import java.util.Objects;
+@XStreamAlias("group")
 public class GroupData {
+    @XStreamOmitField
     private int id = Integer.MAX_VALUE;
     private String name;
     private String header;
     private String footer;
 
- 
     public GroupData withId(int id) { this.id = id; return this;}
 
     public GroupData withName(String name) { this.name = name; return this; }
@@ -46,7 +49,7 @@ public class GroupData {
     @Override
     public String toString() {
         return "GroupData{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
     }

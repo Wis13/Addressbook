@@ -6,9 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
@@ -29,10 +27,10 @@ public class GroupHelper extends HelperBase {
 
     }
 
-    public void fillGroupForm(GroupData groupData) {
-        type(By.name("group_name"), groupData.getName());
-        type(By.name("group_header"), groupData.getHeader());
-        type(By.name("group_footer"), groupData.getFooter());
+    public void fillGroupForm(GroupData group) {
+        type(By.name("group_name"), group.getName());
+        type(By.name("group_header"), group.getHeader());
+        type(By.name("group_footer"), group.getFooter());
     }
 
     public void selectGroupById(int id) {
@@ -66,8 +64,7 @@ public class GroupHelper extends HelperBase {
         fillGroupForm(group);
         submitGroupModification();
         groupCache = null;
-        returnToGroupPage();
-    }
+        returnToGroupPage();}
 
     public void delete(GroupData group) {
         selectGroupById(group.getId());
@@ -91,6 +88,7 @@ public class GroupHelper extends HelperBase {
             return new Groups(groupCache);
         }
         groupCache = new Groups();
+//        Groups groups = new Groups();
         List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             String name = element.getText();
@@ -98,7 +96,7 @@ public class GroupHelper extends HelperBase {
             groupCache.add(new GroupData().withId(id).withName(name));
         }
         return new Groups(groupCache);
+//        return groups;
     }
-
 
 }
